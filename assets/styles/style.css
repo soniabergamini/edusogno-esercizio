@@ -1,0 +1,37 @@
+/* GENERAL STYLE */
+:root {
+    --lightBlue: #D9E5F3; /* Background */
+    --blue: #0057FF; /* Buttons */
+    --darkBlue: #134077; /* Borders, Titles */
+    --dark: #231F20; /* Text */
+    --gray: #CCCCCC; /* Text, Input Fields */
+    --purple: #2D224C; /* CTA */
+    --radiusHeader: .8125rem; /* 13px */
+    --radiusBox: 1.1875rem; /* 19px */
+    --radiusBtn: .6875rem; /* 11px */
+    --headerHeight: 7.9375rem; /* 127px */
+}
+
+body {
+    max-width: 87.5rem;
+    margin: 0 auto;
+    background-color: var(--lightBlue);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* HEADER STYLE */
+header {
+    height: var(--headerHeight);
+    box-shadow: 0px 4px 18px -6px var(--blue);
+}
+
+/* MAIN STYLE */
+main {
+    height: calc( 100dvh - var(--headerHeight) );
+}

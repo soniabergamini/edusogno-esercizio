@@ -1,0 +1,77 @@
+/********************************************
+        FLEX & GAP CONTAINERS HELPERS 
+********************************************/
+.dFlex          {display: flex;}
+.flexColumn     {flex-direction: column;}
+.flexWrap       {flex-wrap: wrap;}
+.flexWrapRev    {flex-wrap: wrap-reverse;}
+.flexRowRev     {flex-direction: row-reverse;}
+.flexSpaceBtw   {justify-content: space-between;}
+.flexJustyCtr   {justify-content: center;}
+.flexSpaceARN   {justify-content: space-around;}
+.flexSpaceEven  {justify-content: space-evenly;}
+.flexAlignCtr   {align-items: center;}
+.flexAlignStart {align-items: flex-start;}
+.flexAlignEnd   {align-items: flex-end;}
+.gap1em         {gap: 1em;}
+
+/********************************************
+    POSITION, TRANSITION & DISPLAY HELPERS 
+ *******************************************/
+.secTrans       {transition: 0.8s;}
+.posFixed       {position: fixed;}
+.posRelative    {position: relative;}
+.posAbsolute    {position: absolute;}
+.dBlock         {display: block;}
+
+/********************************************
+        UTILITY | Customize text  
+ *******************************************/
+.txtWhite       {color: white;}
+.txtGrey        {color: var(--gray);}
+.txtDark        {color: var(--dark);}
+.txtDarkBlue    {color: var(--darkBlue);}
+.txtSmall       {font-size: small;}
+.txtUnderline   {text-decoration: underline;}
+.txtItalic      {font-style: italic;}
+.txtAlignCtr    {text-align: center;}
+.txtVertAlignMid{vertical-align: middle;}
+
+/********************************************
+        GENERIC UTILITIES 
+ *******************************************/
+.pointer         {cursor: pointer;}
+.listStyleNone  {list-style-type: none;}
+.visHidden      {visibility: hidden;}
+.boxShadow      {box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+.bgBlue         {background-color: var(--blue);}
+.bgDarkblue     {background-color: var(--darkBlue);}
+.bgLightBlue    {background-color: var(--lightBlue);}
+.bgWhite        {background-color: white;}
+
+/********************************************
+    UTILITY | Width, Padding, Border, Margin 
+ *******************************************/
+.vw100          {width: 100vw;}
+.vh100          {height: 100vh;}
+.w100           {width: 100%;}
+.w80            {width: 80%;}
+.w60            {width: 60%;}
+.w50            {width: 50%;}
+.w30            {width: 30%;}
+.w25            {width: 25%;}
+.w20            {width: 20%;}
+.px1rem         {padding: 0 1rem;}
+.px2rem         {padding: 0 2rem;}
+.border         {border: 1px solid black;}
+.radiusHeader   {border-radius: 0 0 var(--radiusHeader) var(--radiusHeader);}
+.radiusBox      {border-radius: var(--radiusBox);}
+.radiusBtn      {border-radius: var(--radiusBtn);}
+.radius50       {border-radius: 50%;}
+
+/********************************************
+        UTILITY | hover 
+ *******************************************/
+.boxShadowHov:hover     {box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+.txtUnderHov:hover      {text-decoration: underline;}
+.changeColBlueHov:hover {color: var(--blue);}
