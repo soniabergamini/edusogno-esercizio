@@ -10,10 +10,11 @@
     --radiusBox: 1.1875rem; /* 19px */
     --radiusBtn: .6875rem; /* 11px */
     --headerHeight: 7.9375rem; /* 127px */
+    --maxwidth: 87.5rem;
 }
 
 body {
-    max-width: 87.5rem;
+    max-width: var(--maxwidth);
     margin: 0 auto;
     background-color: var(--lightBlue);
 }
@@ -28,10 +29,23 @@ body {
 /* HEADER STYLE */
 header {
     height: var(--headerHeight);
+    max-width: var(--maxwidth);
     box-shadow: 0px 4px 18px -6px var(--blue);
 }
 
 /* MAIN STYLE */
 main {
-    height: calc( 100dvh - var(--headerHeight) );
+    height: 100dvh;
+}
+
+#backgroundSec {
+    max-width: var(--maxwidth);
+}
+
+.shuttle {
+    bottom: 3.125rem;
+}
+
+#contentSec {
+    padding-top: var(--headerHeight);
 }

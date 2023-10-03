@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['login'] = $_SESSION['login'] ?? false;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +24,19 @@
 </head>
 
 <body>
-    <header class="radiusHeader bgWhite dFlex flexAlignCtr px2rem">
-        <img src="./assets/img/logo.png" alt="edusogno-logo">
-    </header>
+    <?php require_once 'partials/header.php'; ?>
     <main>
-        <p>this is a paragraph</p>
+        <div id="backgroundSec" class="w100 posAbsolute zIndex1 h100">
+            <img src="./assets/img/Ellipse 13.png" alt="background-img1" class="mw100 posAbsolute zIndex5 ycenter">
+            <img src="./assets/img/Ellipse 12.png" alt="background-img2" class="mw100 posAbsolute ycenter zIndex5 r5">
+            <img src="./assets/img/Group 201.png" alt="background-img3" class="mw100 posAbsolute r15 zIndex4 shuttle">
+            <img src="./assets/img/Vector 5.png" alt="background-img4" class="mw100 posAbsolute b10 zIndex1">
+            <img src="./assets/img/Vector 4.png" alt="background-img5" class="mw100 posAbsolute b0 zIndex2">
+            <img src="./assets/img/Vector 1.png" alt="background-img6" class="mw100 posAbsolute b0 zIndex3">
+        </div>
+        <div id="contentSec" class="dFlex flexJustyCtr w100 h100 posRelative zIndex10 yscroll">
+            <?php $_SESSION['login'] ? include_once 'partials/main-dashboard.php' : include_once 'partials/main-login.php'; ?>
+        </div>
     </main>
 </body>
 
