@@ -21,6 +21,8 @@ $_SESSION['login'] = $_SESSION['login'] ?? false;
     <link rel="stylesheet" href="./assets/styles/style.css">
     <!-- Title -->
     <title>Edusogno</title>
+    <!-- Script JS -->
+    <script src="./assets/js/script.js"></script>
 </head>
 
 <body>

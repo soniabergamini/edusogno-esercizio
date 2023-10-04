@@ -46,6 +46,27 @@ main {
     bottom: 3.125rem;
 }
 
+h1 {
+    font-size: 2rem;
+}
+
 #contentSec {
     padding-top: var(--headerHeight);
+}
+
+#registerSec, #loginSec {
+    padding-top: 4rem;
+}
+
+form {
+    margin-top: .8rem;
+    border-color: var(--darkBlue);
+}
+
+form input, form button {
+    font-size: 1.25rem;
+}
+
+form input::placeholder {
+    color: var(--gray);
 }

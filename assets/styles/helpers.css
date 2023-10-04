@@ -14,6 +14,7 @@
 .flexAlignStart {align-items: flex-start;}
 .flexAlignEnd   {align-items: flex-end;}
 .gap1em         {gap: 1em;}
+.flex1          {flex: 1;}
 
 /********************************************
     POSITION, TRANSITION & DISPLAY HELPERS 
@@ -44,9 +45,10 @@
         UTILITY | Customize text  
  *******************************************/
 .txtWhite       {color: white;}
-.txtGrey        {color: var(--gray);}
+.txtGray        {color: var(--gray);}
 .txtDark        {color: var(--dark);}
 .txtDarkBlue    {color: var(--darkBlue);}
+.txtPurple      {color: var(--purple);}
 .txtSmall       {font-size: small;}
 .txtUnderline   {text-decoration: underline;}
 .txtItalic      {font-style: italic;}
@@ -79,9 +81,16 @@
 .w25            {width: 25%;}
 .w20            {width: 20%;}
 .mw100          {max-width: 100%;}
+.mInput         {margin: .5rem 0 1.5rem 0;}
+.my2rem         {margin: 2rem 0;}
 .px1rem         {padding: 0 1rem;}
 .px2rem         {padding: 0 2rem;}
+.pr2rem         {padding-right: 2rem;}
+.py08rem         {padding: .8rem 0;}
+.p2rem          {padding: 2rem;}
 .border         {border: 1px solid black;}
+.borderInput    {border-bottom: 1px solid var(--purple); border-width: 0 0 1px 0;}
+.border0        {border: 0;}
 .radiusHeader   {border-radius: 0 0 var(--radiusHeader) var(--radiusHeader);}
 .radiusBox      {border-radius: var(--radiusBox);}
 .radiusBtn      {border-radius: var(--radiusBtn);}
