@@ -9,6 +9,8 @@
             <img id="passSecurity" src="../assets/img/EyeVector.png" alt="view-pass-icon" class="pointer">
         </div>
         <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>ACCEDI</strong></button>
-        <p class="txtAlignCtr txtSmall txtPurple">Non hai ancora un profilo? <strong class="pointer txtUnderline">Registrati</strong></p>
+        <p class="txtAlignCtr txtSmall txtPurple">
+            <a href="/register" class="txtDecNone">Non hai ancora un profilo? <strong class="txtUnderline">Registrati</strong></a>
+        </p>
     </form>
 </section>

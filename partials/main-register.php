@@ -13,6 +13,8 @@
             <img id="passSecurity" src="../assets/img/EyeVector.png" alt="view-pass-icon" class="pointer">
         </div>
         <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>REGISTRATI</strong></button>
-        <p class="txtAlignCtr txtSmall txtPurple txtUnderline">Ha già un account <strong class="pointer">? Accedi</strong></p> <!-- remember hover -->
+        <p class="txtAlignCtr txtSmall txtPurple">
+            <a href="/login">Ha già un account?<strong> Accedi</strong></a>
+        </p>
     </form>
 </section>
