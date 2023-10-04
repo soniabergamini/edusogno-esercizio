@@ -50,7 +50,9 @@
 .txtDarkBlue    {color: var(--darkBlue);}
 .txtPurple      {color: var(--purple);}
 .txtSmall       {font-size: small;}
+.txtLarge       {font-size: large;}
 .txtUnderline   {text-decoration: underline;}
+.txtDecNone     {text-decoration: none;}
 .txtItalic      {font-style: italic;}
 .txtAlignCtr    {text-align: center;}
 .txtVertAlignMid{vertical-align: middle;}
@@ -86,7 +88,9 @@
 .px1rem         {padding: 0 1rem;}
 .px2rem         {padding: 0 2rem;}
 .pr2rem         {padding-right: 2rem;}
-.py08rem         {padding: .8rem 0;}
+.py03rem        {padding: .3rem 0;}
+.py08rem        {padding: .8rem 0;}
+.p1rem          {padding: 1rem;}
 .p2rem          {padding: 2rem;}
 .border         {border: 1px solid black;}
 .borderInput    {border-bottom: 1px solid var(--purple); border-width: 0 0 1px 0;}

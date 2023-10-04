@@ -54,7 +54,7 @@ h1 {
     padding-top: var(--headerHeight);
 }
 
-#registerSec, #loginSec {
+#registerSec, #loginSec, #notfoundSec {
     padding-top: 4rem;
 }
 
