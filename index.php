@@ -1,4 +1,5 @@
 <?php
+
 // SESSION
 session_start();
 $_SESSION['login'] = $_SESSION['login'] ?? false;
@@ -7,11 +8,11 @@ $_SESSION['login'] = $_SESSION['login'] ?? false;
 require_once 'routes.php';
 
 // PAGE LOGIC: define route and return content
-$url = strtok($_SERVER['REQUEST_URI'], '?'); 
+$url = strtok($_SERVER['REQUEST_URI'], '?');
 $route = $routes[$url] ?? header('Location: /404', true);
-// $consoleVar = json_encode($route); echo "<script> console.log('Route: , $consoleVar')</script>";
+// $consoleVar = json_encode($route); echo "<script> console.log('Route index.php: , $consoleVar')</script>";
 include_once 'controllers/' . $route[0] . '.php';
-$mainContent = (new $route[0])->{$route[1]}();
+$mainContent = (new $route[0])->{$route[1]}($_SESSION);
 
 ?>
 
@@ -49,7 +50,7 @@ $mainContent = (new $route[0])->{$route[1]}();
             <img src="./assets/img/Vector 1.png" alt="background-img6" class="mw100 posAbsolute b0 zIndex3">
         </div>
         <div id="contentSec" class="dFlex flexJustyCtr w100 h100 posRelative zIndex10 yscroll">
-           <?= $mainContent ?>
+            <?= $mainContent ?>
         </div>
     </main>
 </body>

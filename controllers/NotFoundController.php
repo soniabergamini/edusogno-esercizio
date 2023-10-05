@@ -1,7 +1,10 @@
 <?php
 class NotFoundController {
-    public function index() {
-        return file_get_contents('partials/main-notfound.php');
+    public function index($session) {
+        ob_start();
+        include 'partials/main-notfound.php';
+        $content = ob_get_clean();
+        return $content;
     }
 }
 ?>
