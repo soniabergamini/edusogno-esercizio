@@ -42,6 +42,10 @@ class AuthController
         $_SESSION['login'] = false;
         $_SESSION['login_error'] = null;
         $_SESSION['login_email'] = null;
+        $_SESSION['register_error'] = null;
+        $_SESSION['register_email'] = null;
+        $_SESSION['register_name'] = null;
+        $_SESSION['register_surname'] = null;
         $_SESSION['error_title'] = null;
         $_SESSION['error_message'] = null;
     }
@@ -70,16 +74,53 @@ class AuthController
         return $result;
     }
 
-    // PUBLIC FUNCTIONS
-    public function login($session)
+    private function insertNewUserData($email, $password, $name, $surname)
+    {
+        // Prepared Statements
+        $conn = $this->getDBConnection();
+        $stmt = $conn->prepare("INSERT into utenti (email, password, nome, cognome) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $email, $password, $name, $surname);
+        $stmt->execute();
+        $errors = $stmt->error;
+        $stmt->close();
+        $conn->close();
+        if (!$errors) {
+            // Registration successful
+            $_SESSION['login'] = true;
+            $this->redirect('/dashboard');
+        } else {
+            // Registration failed
+            $_SESSION['register_error'] = 'Si è verificato un errore durante la registrazione. Riprova!';
+            $_SESSION['register_email'] = $email;
+            $_SESSION['register_name'] = $name;
+            $_SESSION['register_surname'] = $surname;
+            $this->redirect('/register');
+        }
+    }
+
+    private function validationError($message, $email, $name, $surname)
+    {
+        $_SESSION['register_error'] = $message;
+        $_SESSION['register_email'] = $email;
+        $_SESSION['register_name'] = $name;
+        $_SESSION['register_surname'] = $surname;
+        $this->redirect('/register');
+    }
+
+    private function loadContent($session, $contentPath)
     {
         if (!$session['login']) {
             ob_start();
-            include 'partials/main-login.php';
-            $content = ob_get_clean();
-            return $content;
+            include_once $contentPath;
+            return ob_get_clean();
         }
         $this->redirect('/dashboard');
+    }
+
+    // PUBLIC FUNCTIONS
+    public function login($session)
+    {
+        return $this->loadContent($session, 'partials/main-login.php');
     }
 
     public function loginProcess()
@@ -118,12 +159,67 @@ class AuthController
         }
     }
 
-    public function register()
+    public function register($session)
     {
-        return file_get_contents('partials/main-register.php');
+        return $this->loadContent($session, 'partials/main-register.php');
     }
 
     public function registerProcess()
     {
+        $this->cleanSession();
+        $this->checkRequest($_SERVER['REQUEST_METHOD']);
+
+        // HANDLES REGISTER REQUEST
+        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['name']) && isset($_POST['surname'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $name = $_POST['name'];
+            $surname = $_POST['surname'];
+            $_SESSION['register_error'] = [];
+
+            // VALIDATION
+            $validationError = [];
+            $validationFilters = [
+                [
+                    // Invalid name/surname
+                    'condition' => !preg_match("/^[a-zA-ZÀ-ÿ\s'-]{3,55}$/u", $name) || !preg_match("/^[a-zA-ZÀ-ÿ\s'-]{3,55}$/u", $surname),
+                    'message' => 'Dati non validi. Inserisci un nome e un cognome di almeno 3 caratteri di lunghezza, evitando i caratteri speciali.'
+                ],
+                [
+                    // Invalid email
+                    'condition' => !filter_var($email, FILTER_VALIDATE_EMAIL),
+                    'message' => 'L\'indirizzo email inserito, non è valido.'
+                ],
+                [
+                    // Invalid password
+                    'condition' => !preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $password),
+                    'message' => 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole, maiuscole e numeri.'
+                ]
+            ];
+            foreach ($validationFilters as $filter) {
+                $filter['condition'] && $validationError[] = $filter['message'];
+            }
+            $validationError && $this->validationError($validationError, $email, $name, $surname);
+
+            // CONNECT TO DATABASE
+            $queryResult = $this->getUserByEmail($email);
+
+            // VERIFY EMAIL UNIQUENESS
+            if ($queryResult) {
+                $row = $queryResult->fetch_assoc();
+                // die("Row data: " . print_r($row, true));
+                if ($row) {
+                    // Email already taken
+                    $_SESSION['register_error'][] = 'Email già registrata. Riprova con una mail diversa oppure esegui l\'accesso!';
+                    $_SESSION['register_email'] = $email;
+                    $_SESSION['register_name'] = $name;
+                    $_SESSION['register_surname'] = $surname;
+                    $this->redirect('/register');
+                }
+            }
+
+            // USER REGISTRATION & REDIRECT
+            $this->insertNewUserData($email, $password, $name, $surname);
+        }
     }
 }
