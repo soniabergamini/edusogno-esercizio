@@ -39,15 +39,8 @@ class AuthController
 
     private function cleanSession()
     {
+        session_unset();
         $_SESSION['login'] = false;
-        $_SESSION['login_error'] = null;
-        $_SESSION['login_email'] = null;
-        $_SESSION['register_error'] = null;
-        $_SESSION['register_email'] = null;
-        $_SESSION['register_name'] = null;
-        $_SESSION['register_surname'] = null;
-        $_SESSION['error_title'] = null;
-        $_SESSION['error_message'] = null;
     }
 
     private function checkRequest($requestMethod)
@@ -132,6 +125,7 @@ class AuthController
                 if ($row && $password === $row['password']) {
                     // Login successful
                     $_SESSION['login'] = true;
+                    $_SESSION['user_email'] = $email;
                     $this->redirect('/dashboard');
                 } else {
                     // Login failed
@@ -209,6 +203,7 @@ class AuthController
             if (!$registrationErrors) {
                 // Registration successful
                 $_SESSION['login'] = true;
+                $_SESSION['user_email'] = $email;
                 $this->redirect('/dashboard');
             } else {
                 // Registration failed
