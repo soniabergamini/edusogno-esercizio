@@ -44,7 +44,7 @@ window.addEventListener('load', function () {
                     errorAlert.classList.remove('dBlock');
                     errorAlert.classList.add('dNone');
                 }, 1000);
-            }, 5000);
+            }, 15000);
         }
     }
 
