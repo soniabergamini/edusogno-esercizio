@@ -84,21 +84,10 @@ class AuthController
         $errors = $stmt->error;
         $stmt->close();
         $conn->close();
-        if (!$errors) {
-            // Registration successful
-            $_SESSION['login'] = true;
-            $this->redirect('/dashboard');
-        } else {
-            // Registration failed
-            $_SESSION['register_error'] = 'Si è verificato un errore durante la registrazione. Riprova!';
-            $_SESSION['register_email'] = $email;
-            $_SESSION['register_name'] = $name;
-            $_SESSION['register_surname'] = $surname;
-            $this->redirect('/register');
-        }
+        return $errors;
     }
 
-    private function validationError($message, $email, $name, $surname)
+    private function registrationError($message, $email, $name, $surname)
     {
         $_SESSION['register_error'] = $message;
         $_SESSION['register_email'] = $email;
@@ -199,7 +188,7 @@ class AuthController
             foreach ($validationFilters as $filter) {
                 $filter['condition'] && $validationError[] = $filter['message'];
             }
-            $validationError && $this->validationError($validationError, $email, $name, $surname);
+            $validationError && $this->registrationError($validationError, $email, $name, $surname);
 
             // CONNECT TO DATABASE
             $queryResult = $this->getUserByEmail($email);
@@ -210,16 +199,21 @@ class AuthController
                 // die("Row data: " . print_r($row, true));
                 if ($row) {
                     // Email already taken
-                    $_SESSION['register_error'][] = 'Email già registrata. Riprova con una mail diversa oppure esegui l\'accesso!';
-                    $_SESSION['register_email'] = $email;
-                    $_SESSION['register_name'] = $name;
-                    $_SESSION['register_surname'] = $surname;
-                    $this->redirect('/register');
+                    $this->registrationError('Email già registrata. Riprova con una mail diversa oppure esegui l\'accesso!', $email, $name, $surname);
                 }
             }
 
             // USER REGISTRATION & REDIRECT
-            $this->insertNewUserData($email, $password, $name, $surname);
+            $registrationErrors = $this->insertNewUserData($email, $password, $name, $surname);
+
+            if (!$registrationErrors) {
+                // Registration successful
+                $_SESSION['login'] = true;
+                $this->redirect('/dashboard');
+            } else {
+                // Registration failed
+                $this->registrationError('Si è verificato un errore durante la registrazione. Riprova!', $email, $name, $surname);
+            }
         }
     }
 }
