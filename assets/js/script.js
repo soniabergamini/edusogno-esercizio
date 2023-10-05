@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
     const emailInput = document.getElementById('email');
     const passInput = document.getElementById('password');
     const passSecurity = document.getElementById('passSecurity');
+    const errorAlert = document.querySelector('div.dBlock.alert');
 
 
     // FUNCTIONS
@@ -34,6 +35,17 @@ window.addEventListener('load', function () {
             passInput.type = passInput.type === 'password' ? 'text' : 'password';
             form.addEventListener('submit', () => passInput.type === 'text' && (passInput.type = 'password'), { once: true });
         });
+
+        // Hide error message after 5 seconds
+        if(errorAlert) {
+            setTimeout(() => {
+                errorAlert.style.opacity = '0';
+                this.setTimeout(() => {
+                    errorAlert.classList.remove('dBlock');
+                    errorAlert.classList.add('dNone');
+                }, 1000);
+            }, 5000);
+        }
     }
 
 });

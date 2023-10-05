@@ -4,8 +4,8 @@
     <form id="loginForm" method="POST" action="/loginProcess" class="p2rem border radiusBox bgWhite w50">
 
         <!-- Error Message -->
-        <div id="loginError" class="<?= isset($session['login_error']) && !empty($session['login_error']) ? 'dBlock' : 'dNone' ?>">
-            <p>🚫 <?= $session['login_error'] ?></p>
+        <div class="<?= isset($session['login_error']) && !empty($session['login_error']) ? 'dBlock alert' : 'dNone' ?>">
+            <p class="txtAlignCtr">🚫 <?= $session['login_error'] ?></p>
         </div>
 
         <!-- Form Inputs & Submit -->
