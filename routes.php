@@ -5,6 +5,7 @@ $routes = [
     '/register' => ['AuthController', 'register'],
     '/dashboard' => ['DashboardController', 'index'],
     '/404' => ['NotFoundController', 'index'],
-    '/loginProcess' => ['AuthController', 'loginProcess']
+    '/loginProcess' => ['AuthController', 'loginProcess'],
+    '/registerProcess' => ['AuthController', 'registerProcess']
 ];
 ?>
