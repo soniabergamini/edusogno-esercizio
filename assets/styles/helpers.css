@@ -40,6 +40,7 @@
 .r15            {right: 15%;}
 .ycenter        {top: 50%; transform: translateY(-50%);}
 .dBlock         {display: block;}
+.dNone          {display: none;}
 
 /********************************************
         UTILITY | Customize text  
@@ -56,11 +57,12 @@
 .txtItalic      {font-style: italic;}
 .txtAlignCtr    {text-align: center;}
 .txtVertAlignMid{vertical-align: middle;}
+.txtLineH2rem   {line-height: 2rem;}
 
 /********************************************
         GENERIC UTILITIES 
  *******************************************/
-.pointer         {cursor: pointer;}
+.pointer        {cursor: pointer;}
 .listStyleNone  {list-style-type: none;}
 .visHidden      {visibility: hidden;}
 .boxShadow      {box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);}

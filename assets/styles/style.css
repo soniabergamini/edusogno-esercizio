@@ -70,3 +70,14 @@ form input, form button {
 form input::placeholder {
     color: var(--gray);
 }
+
+form #loginError {
+    text-align: center;
+    padding: 1rem .3rem;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    border-radius: var(--radiusBtn);
+    font-size: .9rem;
+    margin-bottom: 1rem;
+}
