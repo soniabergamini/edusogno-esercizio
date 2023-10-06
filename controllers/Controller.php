@@ -62,6 +62,18 @@ abstract class Controller {
         return $errors;
     }
 
+    protected function insertResetPassToken($token, $email) {
+
+        // Prepared Statements
+        $conn = $this->getDBConnection();
+        $stmt = $conn->prepare("UPDATE utenti SET token = (?) WHERE email = (?)");
+        $stmt->bind_param("ss", $token, $email);
+        $result = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $result;
+    }
+
     protected function cleanSession()
     {
         session_unset();

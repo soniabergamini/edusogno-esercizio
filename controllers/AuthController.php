@@ -29,7 +29,7 @@ class AuthController extends Controller
         session_destroy();
         $this->redirect('/login');
     }
-    
+
     public function login($session)
     {
         return $this->loadContent($session, 'partials/main-login.php');
@@ -138,6 +138,49 @@ class AuthController extends Controller
             } else {
                 // Registration failed
                 $this->registrationError('Si è verificato un errore durante la registrazione. Riprova!', $email, $name, $surname);
+            }
+        }
+    }
+
+    public function resetPassword() {
+        $this->cleanSession();
+        $this->checkRequest($_SERVER['REQUEST_METHOD']);
+
+        // CHECK REGISTERED EMAIL AND SEND RESET LINK
+        if (isset($_POST['email']) && !empty($_POST['email'])) {
+            $email = $_POST['email'];
+
+            // Check if email is registered
+            $queryResult = $this->getUserDataByEmail($email);
+            $row = $queryResult->fetch_assoc();
+
+            if($row) {
+                // Generate token and save it to DB
+                $newToken = uniqid();
+                $addNewTokenToDB = $this->insertResetPassToken($newToken, $email);
+                
+                if($addNewTokenToDB === true) {
+                    // Generate reset password link
+                    $envFile = file_get_contents('.env');
+                    parse_str(str_replace(PHP_EOL, '&', $envFile), $env);
+                    $resetPassLink = $env['APP_URL'] . '/reset-password/' . $newToken;
+
+                    var_dump('resetPassLink: ' . $resetPassLink);
+                } else {
+                    // If something went wrong, show error
+                    $this->setErrorRedirect(
+                        '⚠️ Errore Inatteso',
+                        'Si è verificato un errore nell\'elaborazione della tua richiesta di reimpostare la password. Ci dispiace per l\'inconveniente, cercheremo di risolverlo il prima possibile. Per favore riprova più tardi.',
+                        '/404'
+                    );
+                }
+            } else {
+                // Email not registered
+                $this->setErrorRedirect(
+                    '⚠️ Email Non Registrata',
+                    'Non è stato possibile elaborare la tua richiesta di reimpostare la password perché non ci risultano account associati alla tua email. Registrati oppure accedi con una mail differente.',
+                    '/404'
+                );
             }
         }
     }
