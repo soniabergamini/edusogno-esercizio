@@ -7,6 +7,7 @@ $routes = [
     '/dashboard' => ['DashboardController', 'index'],
     '/404' => ['NotFoundController', 'index'],
     '/loginProcess' => ['AuthController', 'loginProcess'],
-    '/registerProcess' => ['AuthController', 'registerProcess']
+    '/registerProcess' => ['AuthController', 'registerProcess'],
+    '/reset-password' => ['AuthController', 'resetPassword']
 ];
 ?>
