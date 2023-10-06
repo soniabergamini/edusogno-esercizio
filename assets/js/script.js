@@ -9,6 +9,8 @@ window.addEventListener('load', function () {
     const passInput = document.getElementById('password');
     const passSecurity = document.getElementById('passSecurity');
     const errorAlert = document.querySelector('div.dBlock.alert');
+    const resetPass = document.getElementById('resetPass');
+    let emailResetPass = null;
 
 
     // FUNCTIONS
@@ -45,6 +47,29 @@ window.addEventListener('load', function () {
                     errorAlert.classList.add('dNone');
                 }, 1000);
             }, 15000);
+        }
+
+        // Ask user email to reset password and send it to PHP via API call
+        if(resetPass) {
+            resetPass.addEventListener('click', function () {
+                emailResetPass = prompt('Inserisci la tua email qui sotto per reimpostare la password:');
+                if (!validateEmail(emailResetPass)) {
+                    // Invalid email
+                    alert('⚠️ Email non valida. Inserisci un indirizzo email valido per proseguire. Esempio: name@example.it');
+                } else {
+                    // Send email to /reset-password route
+                    let params = new URLSearchParams();
+                    params.append('email', emailResetPass);
+
+                    axios.post('/reset-password', params).then((response) => {
+                        alert('📩 Se il tuo indirizzo email è associato a un account, tra qualche minuto riceverai una mail con il link per reimpostare la password');
+                        console.log('Sent reset password email via api. Response: ', response);
+                    }).catch((error) => {
+                        console.error('Error during reset password API call: ', error);
+                        alert('⚠️ Purtroppo qualcosa è andato storto! Riprova più tardi.');
+                    })
+                }
+            })
         }
     }
 
