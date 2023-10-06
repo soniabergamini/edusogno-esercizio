@@ -8,6 +8,7 @@ $routes = [
     '/404' => ['NotFoundController', 'index'],
     '/loginProcess' => ['AuthController', 'loginProcess'],
     '/registerProcess' => ['AuthController', 'registerProcess'],
-    '/reset-password' => ['AuthController', 'resetPassword']
+    '/reset-password' => ['AuthController', 'resetPassword'],
+    '/new-password' => ['AuthController', 'newPassword']
 ];
 ?>
