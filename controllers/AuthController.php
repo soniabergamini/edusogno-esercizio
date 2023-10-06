@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 require_once 'controllers/Controller.php';
 class AuthController extends Controller
 {
