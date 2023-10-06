@@ -1,85 +1,8 @@
 <?php
-class AuthController
+require_once 'controllers/Controller.php';
+class AuthController extends Controller
 {
     // PRIVATE FUNCTIONS
-    private function getDBConnection()
-    {
-        $envFile = file_get_contents('.env');
-        parse_str(str_replace(PHP_EOL, '&', $envFile), $env);
-        $conn = null;
-        $connError = null;
-        try {
-            $conn = new mysqli($env['DB_SERVERNAME'], $env['DB_USERNAME'], $env['DB_PASSWORD'], $env['DB_NAME'], $env['DB_PORT']);
-        } catch (mysqli_sql_exception $e) {
-            $connError = $e->getMessage();
-        }
-        if ($conn->connect_error || $connError !== null) {
-            $this->setErrorRedirect(
-                '🫤 Errore di connessione',
-                'Si è verificato un errore nell\'elaborazione della tua richiesta. Ci dispiace per l\'inconveniente, cercheremo di risolverlo il prima possibile. Per favore riprova più tardi.',
-                '/404'
-            );
-            return;
-        }
-        return $conn;
-    }
-
-    private function setErrorRedirect($errorTitle, $errorMessage, $url)
-    {
-        $_SESSION['error_title'] = $errorTitle;
-        $_SESSION['error_message'] = $errorMessage;
-        $this->redirect($url);
-    }
-
-    private function redirect($url)
-    {
-        header('Location: ' . $url);
-        exit();
-    }
-
-    private function cleanSession()
-    {
-        session_unset();
-        $_SESSION['login'] = false;
-    }
-
-    private function checkRequest($requestMethod)
-    {
-        if ($requestMethod !== 'POST') {
-            $this->setErrorRedirect(
-                '⚠️ Errore Inatteso',
-                'Si è verificato un errore nell\'elaborazione della tua richiesta. Ci dispiace per l\'inconveniente, cercheremo di risolverlo il prima possibile. Per favore riprova più tardi.',
-                '/404'
-            );
-        }
-    }
-
-    private function getUserByEmail($email)
-    {
-        // Prepared Statements
-        $conn = $this->getDBConnection();
-        $stmt = $conn->prepare("SELECT id, email, password FROM utenti WHERE email = (?)");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
-        $conn->close();
-        return $result;
-    }
-
-    private function insertNewUserData($email, $password, $name, $surname)
-    {
-        // Prepared Statements
-        $conn = $this->getDBConnection();
-        $stmt = $conn->prepare("INSERT into utenti (email, password, nome, cognome) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $email, $password, $name, $surname);
-        $stmt->execute();
-        $errors = $stmt->error;
-        $stmt->close();
-        $conn->close();
-        return $errors;
-    }
-
     private function registrationError($message, $email, $name, $surname)
     {
         $_SESSION['register_error'] = $message;
@@ -117,7 +40,7 @@ class AuthController
             $password = $_POST['password'];
 
             // CONNECT TO DATABASE
-            $queryResult = $this->getUserByEmail($email);
+            $queryResult = $this->getUserDataByEmail($email);
 
             // CHECK LOGIN CREDENTIALS
             if ($queryResult) {
@@ -185,7 +108,7 @@ class AuthController
             $validationError && $this->registrationError($validationError, $email, $name, $surname);
 
             // CONNECT TO DATABASE
-            $queryResult = $this->getUserByEmail($email);
+            $queryResult = $this->getUserDataByEmail($email);
 
             // VERIFY EMAIL UNIQUENESS
             if ($queryResult) {
