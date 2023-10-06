@@ -2,13 +2,12 @@
 window.addEventListener('load', function () {
 
     // VARIABLES
-
-    // Form Elements
     const form = document.querySelector('form');
     const emailInput = document.getElementById('email');
     const passInput = document.getElementById('password');
     const passSecurity = document.getElementById('passSecurity');
     const errorAlert = document.querySelector('div.dBlock.alert');
+    const successAlert = document.querySelector('div.dBlock.success');
     const resetPass = document.getElementById('resetPass');
     let emailResetPass = null;
 
@@ -38,7 +37,7 @@ window.addEventListener('load', function () {
             form.addEventListener('submit', () => passInput.type === 'text' && (passInput.type = 'password'), { once: true });
         });
 
-        // Hide error message after 5 seconds
+        // Hide error message after 15 seconds
         if(errorAlert) {
             setTimeout(() => {
                 errorAlert.style.opacity = '0';
@@ -47,6 +46,17 @@ window.addEventListener('load', function () {
                     errorAlert.classList.add('dNone');
                 }, 1000);
             }, 15000);
+        }
+
+        // Hide success message after 10 seconds
+        if(successAlert) {
+            setTimeout(() => {
+                successAlert.style.opacity = '0';
+                this.setTimeout(() => {
+                    successAlert.classList.remove('dBlock');
+                    successAlert.classList.add('dNone');
+                }, 1000);
+            }, 10000);
         }
 
         // Ask user email to reset password and send it to PHP via API call
@@ -72,5 +82,4 @@ window.addEventListener('load', function () {
             })
         }
     }
-
 });

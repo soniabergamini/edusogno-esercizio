@@ -8,6 +8,11 @@
             <p class="txtAlignCtr">🚫 <?= $session['login_error'] ?></p>
         </div>
 
+        <!-- Success Message -->
+        <div class="<?= isset($session['success_resetpassword']) && !empty($session['success_resetpassword']) ? 'dBlock success' : 'dNone' ?>">
+            <p class="txtAlignCtr">✅ <?= $session['success_resetpassword'] ?></p>
+        </div>
+
         <!-- Form Inputs -->
         <label class="dBlock txtSmall txtDark" for="email"><strong>Inserisci l'email</strong></label>
         <input class="dBlock mInput w100 borderInput" type="email" name="email" id="email" placeholder="name@example.com" value="<?= $session['login_email'] ?? '' ?>" required>

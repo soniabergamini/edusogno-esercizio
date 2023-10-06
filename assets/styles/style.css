@@ -71,7 +71,7 @@ form input::placeholder {
     color: var(--gray);
 }
 
-form .alert {
+form .alert, form .success {
     padding: 1rem;
     color: #721c24;
     background-color: #f8d7da;
@@ -81,6 +81,12 @@ form .alert {
     margin-bottom: 1rem;
     opacity: 1;
     transition: opacity 1s ease;
+}
+
+form .success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
 
 .alert ul {
