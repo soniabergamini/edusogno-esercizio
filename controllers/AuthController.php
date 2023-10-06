@@ -1,5 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
 require_once 'controllers/Controller.php';
 class AuthController extends Controller
 {
@@ -164,25 +163,21 @@ class AuthController extends Controller
                     // Generate reset password link
                     $envFile = file_get_contents('.env');
                     parse_str(str_replace(PHP_EOL, '&', $envFile), $env);
-                    $resetPassLink = $env['APP_URL'] . '/reset-password/' . $newToken;
+                    $resetPassLink = $env['APP_URL'] . '/new-password?token=' . $newToken;
 
-                    var_dump('resetPassLink: ' . $resetPassLink);
-                } else {
-                    // If something went wrong, show error
-                    $this->setErrorRedirect(
-                        '⚠️ Errore Inatteso',
-                        'Si è verificato un errore nell\'elaborazione della tua richiesta di reimpostare la password. Ci dispiace per l\'inconveniente, cercheremo di risolverlo il prima possibile. Per favore riprova più tardi.',
-                        '/404'
-                    );
+                    // Send email
+                    $emailSent = $this->sendEmail($email, $resetPassLink);
+                    if($emailSent) {
+                        echo "<script> console.log('Send Reset Password Mail: Success 🥳 ')</script>";
+                    } else {
+                        echo "<script> console.log('Send Reset Password Mail: Failed 🫤 ')</script>";
+                    }                    
                 }
-            } else {
-                // Email not registered
-                $this->setErrorRedirect(
-                    '⚠️ Email Non Registrata',
-                    'Non è stato possibile elaborare la tua richiesta di reimpostare la password perché non ci risultano account associati alla tua email. Registrati oppure accedi con una mail differente.',
-                    '/404'
-                );
             }
         }
+    }
+    
+    public function newPassword($session) {
+        return $this->loadContent($session, 'partials/main-resetpassword.php');
     }
 }
