@@ -3,6 +3,8 @@
 // SESSION
 session_start();
 $_SESSION['login'] = $_SESSION['login'] ?? false;
+$_SESSION['token'] = $_GET['token'] ?? null;
+$_SESSION['email'] = $_GET['email'] ?? null;
 
 // INCLUDE
 require_once 'routes.php';

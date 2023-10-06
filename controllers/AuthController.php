@@ -163,7 +163,7 @@ class AuthController extends Controller
                     // Generate reset password link
                     $envFile = file_get_contents('.env');
                     parse_str(str_replace(PHP_EOL, '&', $envFile), $env);
-                    $resetPassLink = $env['APP_URL'] . '/new-password?token=' . $newToken;
+                    $resetPassLink = $env['APP_URL'] . '/new-password?token=' . $newToken . '&email=' . $email;
 
                     // Send email
                     $emailSent = $this->sendEmail($email, $resetPassLink);
@@ -179,5 +179,33 @@ class AuthController extends Controller
     
     public function newPassword($session) {
         return $this->loadContent($session, 'partials/main-resetpassword.php');
+    }
+
+    public function newPasswordProcess() {
+        $this->checkRequest($_SERVER['REQUEST_METHOD']);
+
+        // HANDLES REQUEST
+        if (isset($_POST['password']) && !empty($_POST['password'])) {
+            $password = $_POST['password'];
+
+            // VALIDATION & PASSWORD UPDATE
+            if(preg_match("/^(?=.*[a-z])(?=.*[A-Z])[\w@$!%*#?&]{8,}$/", $password)) {
+                // Update password on DB
+                $updatePass = $this->updatePassword($_SESSION['token'], $password, $_SESSION['email']);
+                if($updatePass === true) {
+                    // Successful
+                    $_SESSION['success_resetpassword'] = 'Password reimpostata con successo!';
+                    $this->redirect('/login');
+                } else {
+                    // Failed
+                    $_SESSION['newpassword_error'] = 'Qualcosa è andato storto durante la reimpostazione della password. Riprova';
+                    $this->redirect('/new-password?token=' . $_SESSION['token'] . '&email=' . $_SESSION['email']);
+                }
+            } else {
+                // Failed
+                $_SESSION['newpassword_error'] = 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole e maiuscole. Sono ammessi anche numeri e caratteri speciali.';
+                $this->redirect('/new-password?token=' . $_SESSION['token'] . '&email=' . $_SESSION['email']);
+            }
+        }
     }
 }

@@ -77,6 +77,18 @@ abstract class Controller {
         return $result;
     }
 
+    protected function updatePassword($token, $password, $email) {
+
+        // Prepared Statements
+        $conn = $this->getDBConnection();
+        $stmt = $conn->prepare("UPDATE utenti SET password = (?) WHERE token = (?) AND email = (?)");
+        $stmt->bind_param("sss", $password, $token, $email);
+        $result = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $result;
+    }
+
     protected function cleanSession()
     {
         session_unset();
