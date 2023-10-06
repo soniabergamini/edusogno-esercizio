@@ -57,6 +57,7 @@
 .txtDecNone     {text-decoration: none;}
 .txtItalic      {font-style: italic;}
 .txtAlignCtr    {text-align: center;}
+.txtAlignR      {text-align: right;}
 .txtVertAlignMid{vertical-align: middle;}
 .txtLineH2rem   {line-height: 2rem;}
 
