@@ -98,7 +98,7 @@ class AuthController extends Controller
                 ],
                 [
                     // Invalid password
-                    'condition' => !preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $password),
+                    'condition' => !preg_match("/^(?=.*[a-z])(?=.*[A-Z])[\w@$!%*#?&]{8,}$/", $password),
                     'message' => 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole, maiuscole e numeri.'
                 ]
             ];

@@ -22,7 +22,7 @@
         <input class="dBlock mInput w100 borderInput" type="email" name="email" id="email" pattern="^[\w.-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$" placeholder="name@example.com" value="<?= $session['register_email'] ?? '' ?>" required>
         <label class="dBlock txtSmall txtDark" for="password"><strong>Inserisci la password</strong></label>
         <div class="dFlex flexAlignCtr w100 mInput borderInput">
-            <input type="password" name="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" placeholder="Scrivila qui" required class="border0 flex1 pr2rem">
+            <input type="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])[\w@$!%*#?&]{8,}$" placeholder="Scrivila qui" required class="border0 flex1 pr2rem">
             <img id="passSecurity" src="../assets/img/EyeVector.png" alt="view-pass-icon" class="pointer">
         </div>
         <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>REGISTRATI</strong></button>
