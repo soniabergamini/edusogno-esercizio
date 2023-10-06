@@ -50,6 +50,7 @@
 .txtDark        {color: var(--dark);}
 .txtDarkBlue    {color: var(--darkBlue);}
 .txtPurple      {color: var(--purple);}
+.txtRed         {color: #b62d3a;}
 .txtSmall       {font-size: small;}
 .txtLarge       {font-size: large;}
 .txtUnderline   {text-decoration: underline;}

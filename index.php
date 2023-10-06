@@ -39,7 +39,20 @@ $mainContent = (new $route[0])->{$route[1]}($_SESSION);
 </head>
 
 <body>
-    <?php require_once 'partials/header.php'; ?>
+
+    <header class="radiusHeader bgWhite posFixed w100 t0 zIndex15">
+        <nav class="w100 h100 dFlex flexAlignCtr flexSpaceBtw px2rem">
+            <a href="/login" class="pointer">
+                <img src="../assets/img/logo.png" alt="edusogno-logo">
+            </a>
+            <?php if ($_SESSION['login'] === true) : ?>
+                <a href="/logout" class="pointer txtDecNone txtUnderHov txtDarkBlue txtLarge">
+                    <strong>LOGOUT </strong>
+                    <span class="txtRed">&#10006;</span></a>
+            <?php endif; ?>
+        </nav>
+    </header>
+
     <main>
         <div id="backgroundSec" class="w100 posAbsolute zIndex1 h100">
             <img src="./assets/img/Ellipse 13.png" alt="background-img1" class="mw100 posAbsolute zIndex5 ycenter">
@@ -54,6 +67,7 @@ $mainContent = (new $route[0])->{$route[1]}($_SESSION);
             <?= $mainContent ?>
         </div>
     </main>
+
 </body>
 
 </html>

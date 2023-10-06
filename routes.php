@@ -2,6 +2,7 @@
 $routes = [
     '/' => ['AuthController', 'login'],
     '/login' => ['AuthController', 'login'],
+    '/logout' => ['AuthController', 'logout'],
     '/register' => ['AuthController', 'register'],
     '/dashboard' => ['DashboardController', 'index'],
     '/404' => ['NotFoundController', 'index'],

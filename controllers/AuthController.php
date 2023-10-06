@@ -23,6 +23,13 @@ class AuthController extends Controller
     }
 
     // PUBLIC FUNCTIONS
+    public function logout()
+    {
+        $this->cleanSession();
+        session_destroy();
+        $this->redirect('/login');
+    }
+    
     public function login($session)
     {
         return $this->loadContent($session, 'partials/main-login.php');
@@ -99,7 +106,7 @@ class AuthController extends Controller
                 [
                     // Invalid password
                     'condition' => !preg_match("/^(?=.*[a-z])(?=.*[A-Z])[\w@$!%*#?&]{8,}$/", $password),
-                    'message' => 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole, maiuscole e numeri.'
+                    'message' => 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole e maiuscole. Sono ammessi anche numeri e caratteri speciali.'
                 ]
             ];
             foreach ($validationFilters as $filter) {
