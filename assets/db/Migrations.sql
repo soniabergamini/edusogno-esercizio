@@ -4,6 +4,7 @@ nome varchar(45),
 cognome varchar(45),
 email varchar(255) UNIQUE,
 password varchar(255),
+token varchar(255) UNIQUE,
 PRIMARY KEY (id)
 );
 
