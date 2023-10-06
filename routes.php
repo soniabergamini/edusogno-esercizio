@@ -9,6 +9,7 @@ $routes = [
     '/loginProcess' => ['AuthController', 'loginProcess'],
     '/registerProcess' => ['AuthController', 'registerProcess'],
     '/reset-password' => ['AuthController', 'resetPassword'],
-    '/new-password' => ['AuthController', 'newPassword']
+    '/new-password' => ['AuthController', 'newPassword'],
+    '/new-password-process' => ['AuthController', 'newPasswordProcess']
 ];
 ?>
