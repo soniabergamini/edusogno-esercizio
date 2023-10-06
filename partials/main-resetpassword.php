@@ -1,11 +1,11 @@
 <section id="resetPassSec" class="w100 h100 dFlex flexColumn flexAlignCtr">
     <h1 class="txtAlignCtr txtDarkBlue">Reimposta la password</h1>
 
-    <form id="resetPassForm" action="/newPasswordProcess" method="POST" class="p2rem border radiusBox bgWhite w50">
+    <form id="resetPassForm" action="/new-password-process" method="POST" class="p2rem border radiusBox bgWhite w50">
 
         <!-- Error Message -->
-        <div class="<?= isset($session['login_error']) && !empty($session['login_error']) ? 'dBlock alert' : 'dNone' ?>">
-            <p class="txtAlignCtr">🚫 <?= $session['login_error'] ?></p>
+        <div class="<?= isset($session['newpassword_error']) && !empty($session['newpassword_error']) ? 'dBlock alert' : 'dNone' ?>">
+            <p class="txtAlignCtr">🚫 <?= $session['newpassword_error'] ?></p>
         </div>
 
         <!-- Form Input -->
@@ -17,7 +17,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>SALVA</strong></button>
-        
+
     </form>
 
 </section>
