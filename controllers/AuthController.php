@@ -185,26 +185,29 @@ class AuthController extends Controller
         $this->checkRequest($_SERVER['REQUEST_METHOD']);
 
         // HANDLES REQUEST
-        if (isset($_POST['password']) && !empty($_POST['password'])) {
+        if (isset($_POST['password']) && !empty($_POST['password'] && isset($_POST['email']) && isset($_POST['token']))) {
             $password = $_POST['password'];
+            $email = $_POST['email'];
+            $token = $_POST['token'];
 
             // VALIDATION & PASSWORD UPDATE
             if(preg_match("/^(?=.*[a-z])(?=.*[A-Z])[\w@$!%*#?&]{8,}$/", $password)) {
                 // Update password on DB
-                $updatePass = $this->updatePassword($_SESSION['token'], $password, $_SESSION['email']);
+                $updatePass = $this->updatePassword($token, $password, $email);
                 if($updatePass === true) {
                     // Successful
+                    $this->cleanSession();
                     $_SESSION['success_resetpassword'] = 'Password reimpostata con successo!';
                     $this->redirect('/login');
                 } else {
                     // Failed
                     $_SESSION['newpassword_error'] = 'Qualcosa è andato storto durante la reimpostazione della password. Riprova';
-                    $this->redirect('/new-password?token=' . $_SESSION['token'] . '&email=' . $_SESSION['email']);
+                    $this->redirect('/new-password?token=' . $token . '&email=' . $email);
                 }
             } else {
                 // Failed
                 $_SESSION['newpassword_error'] = 'Password non valida. Inserisci una password di almeno 8 caratteri, composta da lettere minuscole e maiuscole. Sono ammessi anche numeri e caratteri speciali.';
-                $this->redirect('/new-password?token=' . $_SESSION['token'] . '&email=' . $_SESSION['email']);
+                $this->redirect('/new-password?token=' . $token . '&email=' . $email);
             }
         }
     }
