@@ -38,7 +38,7 @@
                             <p class="txtGray py03rem"> <?= date('d-m-Y H:i', strtotime($event['data_evento'])) ?></p>
                             <p class="txtDarkBlue py03rem">
                                 <strong>Partecipanti: </strong>
-                                <span><?= count(explode(',', $event['attendees'])) ?></span>
+                                <span><?= !empty($event['attendees']) ? count(explode(',', $event['attendees'])) : '0' ?></span>
                             </p>
                         </div>
     
@@ -102,7 +102,7 @@
             <label class="dBlock txtSmall txtDark" for="eventDescription"><strong>Description</strong></label>
             <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventDescription" id="eventDescription" required>
 
-            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong></label>
+            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong> (Inserisci solo email separate da virgole, senza spazi)</label>
             <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventAttendees" id="eventAttendees" required>
 
             <label class="dBlock txtSmall txtDark" for="eventDate"><strong>Date</strong></label>
@@ -130,8 +130,8 @@
             <label class="dBlock txtSmall txtDark" for="eventDescription"><strong>Description</strong></label>
             <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventDescription" id="eventDescription" required>
 
-            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong></label>
-            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventAttendees" id="eventAttendees">
+            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong> (Inserisci solo email separate da virgole, senza spazi)</label>
+            <input class="dBlock mInput w100 borderInput" placeholder="example@example.com,example2@example.com" type="text" minlength="3" name="eventAttendees" id="eventAttendees">
 
             <label class="dBlock txtSmall txtDark" for="eventDate"><strong>Date</strong></label>
             <input class="dBlock mInput w100 borderInput" type="date" minlength="3" name="eventDate" id="eventDate" required>

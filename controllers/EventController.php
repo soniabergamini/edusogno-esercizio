@@ -9,10 +9,11 @@ class EventController extends Controller {
             
             // Set data and create new event
             $eventDate = $_POST['eventDate'] . ' ' . $_POST['eventTime'];
-            $event = new Event($_POST['eventName'], $eventDate, $_POST['eventAttendees'] = '', $_POST['eventDescription']);
+            $eventAttendees = $_POST['eventAttendees'] ?? '';
+            $event = new Event($_POST['eventName'], $eventDate, $eventAttendees, $_POST['eventDescription']);
             $event->setEventName($_POST['eventName']);
             $event->setEventDate($eventDate);
-            $event->setEventAttendees($_POST['eventAttendees'] ?? '');
+            $event->setEventAttendees($eventAttendees);
             $event->setEventDescription($_POST['eventDescription']);
             $errors = $event->createEvent();
 
