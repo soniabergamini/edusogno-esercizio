@@ -25,7 +25,7 @@
         <button id="addEventBtn" class="pointer mt1rem radiusBtn border0 boxShadow txtDarkBlue"><strong>➕ NUOVO EVENTO</strong></button>
 
         <!-- All Events -->
-        <div class="w100 p2rem dFlex flexSpaceEven flexAlignCtr flexWrap txtAlignCtr">
+        <div class="w100 p2rem dFlex flexSpaceEven flexWrap txtAlignCtr">
     
             <?php if(isset($session['events']) && !empty($session['events'])) : ?>
                 <?php foreach ($session['events'] as $event) : ?>
@@ -114,6 +114,34 @@
             <div class="dFlex flexSpaceBtw mt1rem">
                 <button id="btnClose" class="radiusBtn w45 bgBlue txtWhite py03rem border pointer btnRedHov">ANNULLA</button>
                 <button type="submit" class="radiusBtn w45 bgRed txtWhite py03rem borderRed pointer btnRedHov">SALVA</button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- New Event Form -->
+    <div class="dNone bgWhite border radiusBox p2rem posAbsolute zIndex15 xyCenter w50" id="createForm">
+        <form action="/event-create" method="POST">
+            <p class="txtAlignCtr txtDarkBlue txtLarge"><strong>Nuovo Evento</strong></p>
+
+            <label class="dBlock txtSmall txtDark" for="eventName"><strong>Nome</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" maxlength="55" name="eventName" id="eventName" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventDescription"><strong>Description</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventDescription" id="eventDescription" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventAttendees" id="eventAttendees">
+
+            <label class="dBlock txtSmall txtDark" for="eventDate"><strong>Date</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="date" minlength="3" name="eventDate" id="eventDate" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventTime"><strong>Time</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="time" minlength="3" name="eventTime" id="eventTime" required>
+
+            <div class="dFlex flexSpaceBtw mt1rem">
+                <button id="btnCancel" class="radiusBtn w45 bgBlue txtWhite py03rem border pointer btnRedHov">ANNULLA</button>
+                <button type="submit" class="radiusBtn w45 bgRed txtWhite py03rem borderRed pointer btnRedHov">CREA</button>
             </div>
 
         </form>

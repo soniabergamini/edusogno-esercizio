@@ -5,7 +5,27 @@ require_once 'controllers/Controller.php';
 class EventController extends Controller {
 
     public function createEvent() {
+        if (isset($_POST['eventName']) && isset($_POST['eventDate']) && isset($_POST['eventTime']) && isset($_POST['eventDescription'])) {
+            
+            // Set data and create new event
+            $eventDate = $_POST['eventDate'] . ' ' . $_POST['eventTime'];
+            $event = new Event($_POST['eventName'], $eventDate, $_POST['eventAttendees'] = '', $_POST['eventDescription']);
+            $event->setEventName($_POST['eventName']);
+            $event->setEventDate($eventDate);
+            $event->setEventAttendees($_POST['eventAttendees'] ?? '');
+            $event->setEventDescription($_POST['eventDescription']);
+            $errors = $event->createEvent();
 
+            if(!$errors) {
+                $_SESSION['refresh'] = false;
+                $this->redirect('/dashboard');
+            }else {
+                $_SESSION['event_error'] = '🫤 Errore Inatteso. Non è stato possibile creare l\'evento. Riprova più tardi.';
+                $this->redirect('/dashboard');
+            }
+        }
+        $_SESSION['event_error'] = '🫤 Errore Inatteso. Non è stato possibile creare l\'evento. Riprova più tardi.';
+        $this->redirect('/dashboard');
     }
 
     public function editEvent() {

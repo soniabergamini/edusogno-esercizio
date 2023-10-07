@@ -13,6 +13,8 @@ window.addEventListener('load', function () {
     const deleteForm = document.getElementById('deleteForm');
     const editBtns = document.querySelectorAll('.editBtn');
     const editForm = document.getElementById('editForm');
+    const createBtn = document.getElementById('addEventBtn');
+    const createForm = document.getElementById('createForm');
     let emailResetPass = null;
 
 
@@ -159,6 +161,26 @@ window.addEventListener('load', function () {
             editForm.querySelector('input[name="eventTime"]').value = '';
             editForm.querySelector('input[name="eventAttendees"]').value = '';
             editForm.querySelector('input[name="eventDescription"]').value = '';
+            document.querySelector('#dashboardSec>div:first-child').classList.remove('overlay');
+        })
+    }
+
+    createBtn.addEventListener('click', function () {
+        createForm.classList.remove('dNone');
+        createForm.classList.add('dBlock');
+        document.querySelector('#dashboardSec>div:first-child').classList.add('overlay');
+    })
+
+    if(createForm) {
+        document.getElementById('btnCancel').addEventListener('click', function (event) {
+            event.preventDefault();
+            createForm.classList.add('dNone');
+            createForm.classList.remove('dBlock');
+            createForm.querySelector('input[name="eventName"]').value = '';
+            createForm.querySelector('input[name="eventDate"]').value = '';
+            createForm.querySelector('input[name="eventTime"]').value = '';
+            createForm.querySelector('input[name="eventAttendees"]').value = '';
+            createForm.querySelector('input[name="eventDescription"]').value = '';
             document.querySelector('#dashboardSec>div:first-child').classList.remove('overlay');
         })
     }

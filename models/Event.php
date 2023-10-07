@@ -88,6 +88,20 @@ class Event {
         
     }
 
+    public function createEvent() {
+
+        $conn = $this->getDBConnection();
+        $stmt = $conn->prepare("INSERT INTO eventi (nome_evento, data_evento, attendees, descrizione) VALUES (?,?,?,?)");
+        $stmt->bind_param("ssss", $this->name, $this->date, $this->attendees, $this->description);
+        $stmt->execute();
+        $errors = $stmt->error;
+        $stmt->close();
+        $conn->close();
+
+        return $errors;
+        
+    }
+
     // PRIVATE METHODS
     private function getDBConnection()
     {
