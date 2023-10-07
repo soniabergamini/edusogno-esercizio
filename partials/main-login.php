@@ -31,11 +31,11 @@
         </p>
         
         <!-- Submit Button -->
-        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>ACCEDI</strong></button>
+        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem my2rem pointer btnBlueHov border"><strong>ACCEDI</strong></button>
 
         <!-- Redirect to Register Route -->
         <p class="txtAlignCtr txtSmall txtPurple">
-            <a href="/register" class="txtDecNone">Non hai ancora un profilo? <strong class="txtUnderline">Registrati</strong></a>
+            <a href="/register" class="txtDecNone changeColBlueHov">Non hai ancora un profilo? <strong class="txtUnderline">Registrati</strong></a>
         </p>
 
     </form>

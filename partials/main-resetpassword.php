@@ -18,7 +18,7 @@
         <input type="hidden" name="email" value="<?= $_SESSION['email']; ?>">
 
         <!-- Submit Button -->
-        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>SALVA</strong></button>
+        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem my2rem pointer btnBlueHov border"><strong>SALVA</strong></button>
 
     </form>
 

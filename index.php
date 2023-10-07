@@ -51,7 +51,7 @@ $mainContent = (new $route[0])->{$route[1]}($_SESSION);
             </a>
             <?php if ($_SESSION['login'] === true) : ?>
                 <a href="/logout" class="pointer txtDecNone txtUnderHov txtDarkBlue txtLarge">
-                    <strong>LOGOUT </strong>
+                    <strong>ESCI </strong>
                     <span class="txtRed">&#10006;</span></a>
             <?php endif; ?>
         </nav>

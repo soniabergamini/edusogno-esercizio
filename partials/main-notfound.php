@@ -6,8 +6,8 @@
 
     <!-- Links -->
     <nav class="dFlex w50 gap1em flexJustyCtr">
-        <a href="/login" class="radiusBtn bgBlue txtWhite border0 pointer px1rem txtLarge txtAlignCtr w25 py03rem txtDecNone"><strong>ACCEDI</strong></a>
-        <a href="/register" class="radiusBtn bgBlue txtWhite border0 pointer px1rem txtLarge txtAlignCtr w25 py03rem txtDecNone"><strong>REGISTRATI</strong></a>
+        <a href="/login" class="radiusBtn bgBlue txtWhite pointer px1rem txtLarge txtAlignCtr w25 py03rem txtDecNone btnBlueHov border"><strong>ACCEDI</strong></a>
+        <a href="/register" class="radiusBtn bgBlue txtWhite pointer px1rem txtLarge txtAlignCtr w25 py03rem txtDecNone btnBlueHov border"><strong>REGISTRATI</strong></a>
     </nav>
 
 </section>

@@ -10,7 +10,7 @@
     --radiusBox: 1.1875rem; /* 19px */
     --radiusBtn: .6875rem; /* 11px */
     --headerHeight: 7.9375rem; /* 127px */
-    --maxwidth: 87.5rem;
+    --maxwidth: 87.5rem; /* 1400px */
 }
 
 body {
@@ -99,4 +99,13 @@ form .success {
 
 .event {
     padding: 2rem 2.5rem;
+}
+
+#addEventBtn {
+    padding: .4rem .5rem;
+    transition: box-shadow .3s ease;
+}
+
+#addEventBtn:hover {
+    box-shadow: 0px 3px 2px 2px #0055ff64;
 }

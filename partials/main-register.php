@@ -29,11 +29,11 @@
             <img id="passSecurity" src="../assets/img/EyeVector.png" alt="view-pass-icon" class="pointer">
         </div>
 
-        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem border0 my2rem pointer"><strong>REGISTRATI</strong></button>
+        <button type="submit" class="radiusBtn w100 bgBlue txtWhite py08rem my2rem pointer btnBlueHov border"><strong>REGISTRATI</strong></button>
 
         <!-- Redirect to Login Route -->
         <p class="txtAlignCtr txtSmall txtPurple">
-            <a href="/login">Ha già un account?<strong> Accedi</strong></a>
+            <a href="/login" class="changeColBlueHov">Ha già un account?<strong> Accedi</strong></a>
         </p>
 
     </form>
