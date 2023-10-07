@@ -12,14 +12,14 @@
     </h1>
 
     <!-- User Events -->
-    <div class="w100 p2rem dFlex flexSpaceEven flexAlignCtr">
+    <div class="w100 p2rem dFlex flexWrap flexSpaceEven flexAlignCtr">
 
-        <?php if(isset($session['user_events']) && !empty($session['user_events'])) : ?>
-            <?php foreach ($session['user_events'] as $event) : ?>
+        <?php if(isset($session['events']) && !empty($session['events'])) : ?>
+            <?php foreach ($session['events'] as $event) : ?>
                 <div class="bgWhite border radiusBox event">
                     <h2 class="txtDark"> <?= $event['nome_evento'] ?> </h2>
-                    <p class="txtGray my1rem"> <?= $event['data_evento'] ?></p>
-                    <button class="radiusBtn w100 bgBlue txtWhite py08rem border0 pointer"><strong>JOIN</strong></button>
+                    <p class="txtGray my1rem"> <?= date('d-m-Y H:i', strtotime($event['data_evento'])) ?></p>
+                    <button class="radiusBtn w100 bgBlue txtWhite py08rem pointer btnBlueHov border"><strong>JOIN</strong></button>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>

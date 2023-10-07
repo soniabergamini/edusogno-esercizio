@@ -52,12 +52,21 @@ abstract class Controller {
         return $result;
     }
 
+    protected function getAllEvents() 
+    {
+        $conn = $this->getDBConnection();
+        $result = $conn->query("SELECT * FROM eventi");
+        $conn->close();
+        return $result;
+    }
+
     protected function insertNewUserData($email, $password, $name, $surname)
     {
         // Prepared Statements
         $conn = $this->getDBConnection();
-        $stmt = $conn->prepare("INSERT into utenti (email, password, nome, cognome) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $email, $password, $name, $surname);
+        $stmt = $conn->prepare("INSERT into utenti (email, password, nome, cognome, ruolo) VALUES (?, ?, ?, ?, ?)");
+        $ruolo = 'utente';
+        $stmt->bind_param("sssss", $email, $password, $name, $surname, $ruolo);
         $stmt->execute();
         $errors = $stmt->error;
         $stmt->close();

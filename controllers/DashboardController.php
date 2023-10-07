@@ -34,7 +34,7 @@ class DashboardController extends Controller
     // PUBLIC FUNCTIONS
     public function index($session)
     {
-        if ($session['login'] && isset($session['user_email'])) {
+        if ($session['login'] && isset($session['user_email']) && isset($session['role'])) {
 
             ob_start();
 
@@ -42,15 +42,21 @@ class DashboardController extends Controller
             $resultData = $this->getUserDataByEmail($session['user_email']);
             $userData = $resultData->fetch_assoc();
 
-            // Get user events
+            // Get events
             $userEvents = $this->getUserEventsByEMail($session['user_email']);
+            $eventsData = $this->getAllEvents();
+            $allEvents = [];
+            while ($row = $eventsData->fetch_assoc()) {
+                $allEvents[] = $row;
+            }
 
             // Save data in session
             if ($userData || $userEvents) {
                 
                 $_SESSION['user_name'] = $userData['nome'];
                 $_SESSION['user_surname'] = $userData['cognome'];
-                $_SESSION['user_events'] = $userEvents;
+                $_SESSION['events'] = $userData['ruolo'] === 'admin' ? $allEvents : $userEvents;                
+                $_SESSION['role'] = $userData['ruolo'];
 
                 // Refresh page once
                 if (!isset($_SESSION['refresh_page'])) {
@@ -58,11 +64,13 @@ class DashboardController extends Controller
                     header("Refresh:0");
                 }
 
-                include_once 'partials/main-dashboard.php';
+                $path = $session['role'] === 'admin' ? 'partials/main-admin-dashboard.php' : 'partials/main-user-dashboard.php';
+                include_once $path;
                 return ob_get_clean();
 
             } else {
-                include_once 'partials/main-dashboard.php';
+                $_SESSION['role'] = 'utente';
+                include_once 'partials/main-user-dashboard.php';
                 return ob_get_clean();
             }
         } 

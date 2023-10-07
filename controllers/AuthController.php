@@ -55,6 +55,7 @@ class AuthController extends Controller
                 if ($row && $password === $row['password']) {
                     // Login successful
                     $_SESSION['login'] = true;
+                    $_SESSION['role'] = $row['ruolo'];
                     $_SESSION['user_email'] = $email;
                     $this->redirect('/dashboard');
                 } else {
@@ -132,6 +133,7 @@ class AuthController extends Controller
 
             if (!$registrationErrors) {
                 // Registration successful
+                $_SESSION['role'] = 'utente';
                 $_SESSION['login'] = true;
                 $_SESSION['user_email'] = $email;
                 $this->redirect('/dashboard');
@@ -178,7 +180,11 @@ class AuthController extends Controller
     }
     
     public function newPassword($session) {
-        return $this->loadContent($session, 'partials/main-resetpassword.php');
+        if (isset($session['token']) && isset($session['email'])) {
+            return $this->loadContent($session, 'partials/main-resetpassword.php');
+        }
+        $this->redirect('/login');
+        
     }
 
     public function newPasswordProcess() {
