@@ -59,8 +59,9 @@ class DashboardController extends Controller
                 $_SESSION['role'] = $userData['ruolo'];
 
                 // Refresh page once
-                if (!isset($_SESSION['refresh_page'])) {
+                if (!isset($_SESSION['refresh_page']) || !$_SESSION['refresh']) {
                     $_SESSION['refresh_page'] = true;
+                    $_SESSION['refresh'] = true;
                     header("Refresh:0");
                 }
 
