@@ -10,6 +10,7 @@ $routes = [
     '/registerProcess' => ['AuthController', 'registerProcess'],
     '/reset-password' => ['AuthController', 'resetPassword'],
     '/new-password' => ['AuthController', 'newPassword'],
-    '/new-password-process' => ['AuthController', 'newPasswordProcess']
+    '/new-password-process' => ['AuthController', 'newPasswordProcess'],
+    '/event-destroy' => ['EventController', 'destroyEvent'],
 ];
 ?>
