@@ -1,6 +1,6 @@
 <?php
-
 // SESSION
+session_set_cookie_params(3600); // Session destroy after 1 hour
 session_start();
 $_SESSION['login'] = $_SESSION['login'] ?? false;
 $_SESSION['token'] = $_GET['token'] ?? null;
@@ -52,7 +52,8 @@ $mainContent = (new $route[0])->{$route[1]}($_SESSION);
             <?php if ($_SESSION['login'] === true) : ?>
                 <a href="/logout" class="pointer txtDecNone txtUnderHov txtDarkBlue txtLarge">
                     <strong>ESCI </strong>
-                    <span class="txtRed">&#10006;</span></a>
+                    <span class="txtRed">&#10006;</span>
+                </a>
             <?php endif; ?>
         </nav>
     </header>
