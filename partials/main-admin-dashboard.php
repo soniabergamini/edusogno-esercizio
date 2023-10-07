@@ -42,8 +42,17 @@
                             </p>
                         </div>
     
-                        <!-- Edit/Delete Event Buttons -->
-                        <button class="radiusBtn w100 bgBlue txtWhite py08rem pointer btnBlueHov border"><strong>MODIFICA</strong></button>
+                        <!-- Edit Event Button -->
+                        <button class="radiusBtn w100 bgBlue txtWhite py08rem pointer btnBlueHov border editBtn"
+                        data-event-id="<?= $event['id'] ?>" 
+                        data-event-name="<?= $event['nome_evento'] ?>" 
+                        data-event-date="<?= $event['data_evento'] ?>" 
+                        data-event-attendees="<?= $event['attendees'] ?>" 
+                        data-event-description="<?= $event['descrizione'] ?>">
+                            <strong>MODIFICA</strong>
+                        </button>
+
+                        <!-- Delete Event Button -->
                         <button class="radiusBtn w100 bgRed mt1rem txtWhite py08rem borderRed pointer btnRedHov deleteBtn" 
                         data-event-id="<?= $event['id'] ?>" 
                         data-event-name="<?= $event['nome_evento'] ?>" 
@@ -78,6 +87,35 @@
                 <button id="closeBtn" class="radiusBtn w45 bgBlue txtWhite py03rem border pointer btnRedHov">ANNULLA</button>
                 <button type="submit" class="radiusBtn w45 bgRed txtWhite py03rem borderRed pointer btnRedHov">ELIMINA</button>
             </div>
+        </form>
+    </div>
+
+    <!-- Edit Event Form -->
+    <div class="dNone bgWhite border radiusBox p2rem posAbsolute zIndex15 xyCenter w50" id="editForm">
+        <form action="/event-edit" method="POST">
+            <p class="txtAlignCtr txtDarkBlue txtLarge"><strong>Modifica Evento</strong></p>
+            <input type="hidden" name="eventID">
+
+            <label class="dBlock txtSmall txtDark" for="eventName"><strong>Nome</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" maxlength="55" name="eventName" id="eventName" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventDescription"><strong>Description</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventDescription" id="eventDescription" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventAttendees"><strong>Attendees</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="text" minlength="3" name="eventAttendees" id="eventAttendees" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventDate"><strong>Date</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="date" minlength="3" name="eventDate" id="eventDate" required>
+
+            <label class="dBlock txtSmall txtDark" for="eventTime"><strong>Time</strong></label>
+            <input class="dBlock mInput w100 borderInput" type="time" minlength="3" name="eventTime" id="eventTime" required>
+
+            <div class="dFlex flexSpaceBtw mt1rem">
+                <button id="btnClose" class="radiusBtn w45 bgBlue txtWhite py03rem border pointer btnRedHov">ANNULLA</button>
+                <button type="submit" class="radiusBtn w45 bgRed txtWhite py03rem borderRed pointer btnRedHov">SALVA</button>
+            </div>
+
         </form>
     </div>
 

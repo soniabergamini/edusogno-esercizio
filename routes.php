@@ -12,5 +12,6 @@ $routes = [
     '/new-password' => ['AuthController', 'newPassword'],
     '/new-password-process' => ['AuthController', 'newPasswordProcess'],
     '/event-destroy' => ['EventController', 'destroyEvent'],
+    '/event-edit' => ['EventController', 'editEvent'],
 ];
 ?>

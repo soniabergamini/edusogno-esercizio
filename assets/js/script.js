@@ -11,6 +11,8 @@ window.addEventListener('load', function () {
     const resetPass = document.getElementById('resetPass');
     const deleteBtns = document.querySelectorAll('.deleteBtn');
     const deleteForm = document.getElementById('deleteForm');
+    const editBtns = document.querySelectorAll('.editBtn');
+    const editForm = document.getElementById('editForm');
     let emailResetPass = null;
 
 
@@ -89,7 +91,6 @@ window.addEventListener('load', function () {
     if (deleteBtns) {
         deleteBtns.forEach(button => {
             button.addEventListener('click', function () {
-                console.log('Button clicked');
                 const eventID = this.getAttribute('data-event-id');
                 const eventName = this.getAttribute('data-event-name');
                 const eventDate = this.getAttribute('data-event-date');
@@ -120,6 +121,44 @@ window.addEventListener('load', function () {
             deleteForm.querySelector('input[name="eventAttendees"]').value = '';
             deleteForm.querySelector('input[name="eventDescription"]').value = '';
             document.getElementById('formEventName').innerText = '';
+            document.querySelector('#dashboardSec>div:first-child').classList.remove('overlay');
+        })
+    }
+
+    if (editBtns) {
+        editBtns.forEach(button => {
+            button.addEventListener('click', function () {
+                const eventID = this.getAttribute('data-event-id');
+                const eventName = this.getAttribute('data-event-name');
+                const eventDate = this.getAttribute('data-event-date');
+                [date, time] = eventDate.split(' ');
+                const eventAttendees = this.getAttribute('data-event-attendees');
+                const eventDescription = this.getAttribute('data-event-description');                
+
+                editForm.classList.remove('dNone');
+                editForm.classList.add('dBlock');
+                editForm.querySelector('input[name="eventID"]').value = eventID;
+                editForm.querySelector('input[name="eventName"]').value = eventName;
+                editForm.querySelector('input[name="eventDate"]').value = date;
+                editForm.querySelector('input[name="eventTime"]').value = time;
+                editForm.querySelector('input[name="eventAttendees"]').value = eventAttendees;
+                editForm.querySelector('input[name="eventDescription"]').value = eventDescription;
+                document.querySelector('#dashboardSec>div:first-child').classList.add('overlay');
+            });
+        });
+    }
+
+    if(editForm) {
+        document.getElementById('btnClose').addEventListener('click', function (event) {
+            event.preventDefault();
+            editForm.classList.add('dNone');
+            editForm.classList.remove('dBlock');
+            editForm.querySelector('input[name="eventID"]').value = '';
+            editForm.querySelector('input[name="eventName"]').value = '';
+            editForm.querySelector('input[name="eventDate"]').value = '';
+            editForm.querySelector('input[name="eventTime"]').value = '';
+            editForm.querySelector('input[name="eventAttendees"]').value = '';
+            editForm.querySelector('input[name="eventDescription"]').value = '';
             document.querySelector('#dashboardSec>div:first-child').classList.remove('overlay');
         })
     }

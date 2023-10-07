@@ -74,6 +74,20 @@ class Event {
         
     }
 
+    public function updateEvent($eventID) {
+
+        $conn = $this->getDBConnection();
+        $stmt = $conn->prepare("UPDATE eventi SET nome_evento = (?), data_evento = (?), attendees = (?), descrizione = (?) WHERE id = (?)");
+        $stmt->bind_param("ssssi", $this->name, $this->date, $this->attendees, $this->description, $eventID);
+        $stmt->execute();
+        $errors = $stmt->error;
+        $stmt->close();
+        $conn->close();
+
+        return $errors;
+        
+    }
+
     // PRIVATE METHODS
     private function getDBConnection()
     {
